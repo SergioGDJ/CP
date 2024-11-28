@@ -1,43 +1,46 @@
 #include<bits/stdc++.h>
-
-using namespace std;
+using namespace std; 
 
 void solve(){
-    int n; cin >> n;
-    int A[100];
-    for(int i=0; i<n; i++) cin >> A[i];
-    
-    int m; cin >> m;
-    int B[100];
-    for(int i=0; i<m; i++) cin >> B[i];
-    
-    set<pair<int, int>> par;
-
+    vector<int> A; 
+    vector<int> B; 
+    int n; cin >> n; 
     for(int i=0; i<n; i++){
-        for(int j=0; j<m; j++){
-            int sum = A[i] + B[j];
-            bool cont = true;
-            bool cont_ = true;
+        int k; cin >> k;
+        A.push_back(k);
+    }
+    int m; cin >> m;
+    for(int i=0; i<m; i++){
+        int k; cin >> k;
+        B.push_back(k);
+    }
+    
+    vector<int> aux; 
+    for(int i=0; i<A.size(); i++){
+        aux.push_back(A[i]);
+    }
+    for(int i=0; i<B.size(); i++){
+        aux.push_back(B[i]);
+    }
 
-            for(int k=0; k<n; k++){
-                if(sum == A[k]) {
-                    cont = false;
+    int count;
+    for(int i=0; i<A.size(); i++){
+        for(int j=0; j<B.size(); j++){
+            count = 0;
+            for(int k=0; k<aux.size(); k++){
+                if(A[i] + B[j] == aux[k]){
                     break;
-                } 
-            }
-            if(cont == true){
-                for(int y = 0; y<m; y++){
-                    if(sum == B[m]) break;
-                    cont_ = false;
                 }
+                else count++;
             }
-            if(cont && cont_){
-                par.insert({A[i], B[j]});
+            if(count == aux.size()){
+                cout << A[i] << " " << B[j] << endl; 
+                return;
             }
         }
     }
-    for(int i=0; i<par.size(); i++) cout << par[i].first << par[i].second;
 }
+
 
 int main(){
     solve();
